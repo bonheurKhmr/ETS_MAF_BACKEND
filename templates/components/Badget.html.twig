@@ -1,0 +1,18 @@
+{% props type = 'primary' %}
+
+{% set badget = cva({
+    base: "py-0.5 px-1 rounded-md border dark:border-gray-800 text-xs inline-block font-semibold",
+    variants: {
+        type: {
+            primary: "text-primary-100 bg-primary-500",
+            secondary: "text-yellow-100 bg-yellow-500",
+            success: "text-green-100 bg-green-500",
+            danger: "text-danger-100 bg-danger-500",
+            tiersary: "text-gray-800 bg-gray-100 border-gray-200 dark:bg-gray-700 dark:text-neutral-200",
+        },
+    }
+}) %}
+
+<div {{ attributes }} class="{{ badget.apply({type}, attributes.render('class')) }}">
+    {% block content %}{% endblock %}
+</div>
