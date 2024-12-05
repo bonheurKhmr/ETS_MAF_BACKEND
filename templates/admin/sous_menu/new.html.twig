@@ -1,0 +1,17 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}Nouveau sous menu{% endblock %}
+
+{% block body %}
+<twig:Brodcump firstLink="app_admin_sous_menu_index" firstLabel="Liste" pageActuel="Nouveau" />
+
+<twig:Card:Card>
+    <twig:Card:Header>
+        <twig:H1>Nouvaux sous menu</twig:H1>
+    </twig:Card:Header>
+    <twig:Card:Body class="p-3">
+        {{ include('admin/sous_menu/_form.html.twig') }}
+    </twig:Card:Body>
+</twig:Card:Card>
+
+{% endblock %}

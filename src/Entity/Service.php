@@ -38,6 +38,9 @@ class Service
     #[ORM\Column]
     private ?bool $is_activated = null;
 
+    #[ORM\ManyToOne(inversedBy: 'services')]
+    private ?SerciveFiles $file = null;
+
     public function getId(): ?int
     {
         return $this->id;
@@ -138,6 +141,18 @@ class Service
     public function setImageFile(?File $imageFile):static
     {
         $this->imageFile = $imageFile;
+
+        return $this;
+    }
+
+    public function getFile(): ?SerciveFiles
+    {
+        return $this->file;
+    }
+
+    public function setFile(?SerciveFiles $file): static
+    {
+        $this->file = $file;
 
         return $this;
     }

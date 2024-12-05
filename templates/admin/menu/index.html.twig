@@ -1,47 +1,72 @@
 {% extends 'base.html.twig' %}
 
-{% block title %}Menu index{% endblock %}
+{% block title %}Menu{% endblock %}
 
 {% block body %}
-    <h1>Menu index</h1>
+<twig:Brodcump pageActuel="list" />
 
-    <table class="table">
-        <thead>
-            <tr>
-                <th>Id</th>
-                <th>Name</th>
-                <th>Description</th>
-                <th>Icon</th>
-                <th>Is_activated</th>
-                <th>Created_at</th>
-                <th>Updated_at</th>
-                <th>Orders</th>
-                <th>actions</th>
-            </tr>
-        </thead>
-        <tbody>
-        {% for menu in menus %}
-            <tr>
-                <td>{{ menu.id }}</td>
-                <td>{{ menu.name }}</td>
-                <td>{{ menu.description }}</td>
-                <td>{{ menu.icon }}</td>
-                <td>{{ menu.isActivated ? 'Yes' : 'No' }}</td>
-                <td>{{ menu.createdAt ? menu.createdAt|date('Y-m-d H:i:s') : '' }}</td>
-                <td>{{ menu.updatedAt ? menu.updatedAt|date('Y-m-d H:i:s') : '' }}</td>
-                <td>{{ menu.orders }}</td>
+
+<twig:Card:Card>
+    <twig:Card:Header>
+        <twig:H1>Menu</twig:H1>
+        <twig:Button link="{{ path('app_admin_menu_new') }}" type="primary">Nouvaux</twig:Button>
+    </twig:Card:Header>
+    <div>
+        <div class="flex justify-end py-2">
+            <twig:Search />
+        </div>
+
+        <twig:Table :thead="['#','Icon', 'label', 'lien', 'Description', 'activate', 'order', 'type']">
+            {% for key, menu in menus %}
+            <twig:Tr>
+                <twig:Td>{{ key + 1 }}</twig:Td>
+                <twig:Td>{{ menu.icon | raw  }}</twig:Td>
+                <twig:Td>
+                    {% if menu.name %}
+                        <a href="{{ path(menu.name) }}" class="text-primary-600 flex gap-2 items-center">
+                            <svg xmlns="http://www.w3.org/2000/svg" fill="currentColor"
+                                class="w-4 h-4 transition duration-75" viewBox="0 0 16 16">
+                                <path
+                                    d="M4.715 6.542 3.343 7.914a3 3 0 1 0 4.243 4.243l1.828-1.829A3 3 0 0 0 8.586 5.5L8 6.086a1 1 0 0 0-.154.199 2 2 0 0 1 .861 3.337L6.88 11.45a2 2 0 1 1-2.83-2.83l.793-.792a4 4 0 0 1-.128-1.287z" />
+                                <path
+                                    d="M6.586 4.672A3 3 0 0 0 7.414 9.5l.775-.776a2 2 0 0 1-.896-3.346L9.12 3.55a2 2 0 1 1 2.83 2.83l-.793.792c.112.42.155.855.128 1.287l1.372-1.372a3 3 0 1 0-4.243-4.243z" />
+                            </svg>
+                            <span>{{ menu.label }}</span>
+                        </a>
+                    {% else %}
+                        <twig:Badget type="default"> Aucune </twig:Badget>
+                    {% endif %}
+                </twig:Td>
+                <twig:Td>
+                    {% if menu.link %}
+                        {{ menu.link }}
+                    {% else %}
+                        <twig:Badget type="default"> Aucune </twig:Badget>
+                    {% endif %}
+                </twig:Td>
+                <twig:Td>{{ menu.description }}</twig:Td>
+                <twig:Td>
+                    {% if menu.isActivated %}
+                    <twig:Badget type="primary"> activé </twig:Badget>
+                    {% else %}
+                    <twig:Badget type="danger"> non activé </twig:Badget>
+                    {% endif %}
+                </twig:Td>
+                <twig:Td>{{ menu.orders }}</twig:Td>
+                <twig:Td>{{ menu.type.type }}</twig:Td>
                 <td>
-                    <a href="{{ path('app_admin_menu_show', {'id': menu.id}) }}">show</a>
-                    <a href="{{ path('app_admin_menu_edit', {'id': menu.id}) }}">edit</a>
+                    <twig:ActionButton edit="{{ path('app_admin_menu_edit', {'id': menu.id}) }}"
+                        show="{{ path('app_admin_menu_show', {'id': menu.id}) }}">
+                        {{ include('admin/menu/_delete_form.html.twig') }}
+                    </twig:ActionButton>
                 </td>
-            </tr>
-        {% else %}
+            </twig:Tr>
+            {% else %}
             <tr>
-                <td colspan="9">no records found</td>
+                <td colspan="7">no records found</td>
             </tr>
-        {% endfor %}
-        </tbody>
-    </table>
-
-    <a href="{{ path('app_admin_menu_new') }}">Create new</a>
+            {% endfor %}
+        </twig:Table>
+    </div>
+</twig:Card:Card>
 {% endblock %}

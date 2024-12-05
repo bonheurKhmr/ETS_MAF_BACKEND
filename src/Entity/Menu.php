@@ -7,6 +7,7 @@ use Doctrine\Common\Collections\ArrayCollection;
 use Doctrine\Common\Collections\Collection;
 use Doctrine\DBAL\Types\Types;
 use Doctrine\ORM\Mapping as ORM;
+use Symfony\Component\Serializer\Attribute\Groups;
 
 #[ORM\Entity(repositoryClass: MenuRepository::class)]
 class Menu
@@ -14,15 +15,17 @@ class Menu
     #[ORM\Id]
     #[ORM\GeneratedValue]
     #[ORM\Column]
+    #[Groups(['menu.index'])]
     private ?int $id = null;
 
-    #[ORM\Column(length: 100)]
+    #[ORM\Column(length: 100, nullable: true)]
     private ?string $name = null;
 
     #[ORM\Column(type: Types::TEXT, nullable: true)]
     private ?string $description = null;
 
-    #[ORM\Column(length: 255, nullable: true)]
+    #[Groups(['menu.index'])]
+    #[ORM\Column(type: Types::TEXT, nullable: true)]
     private ?string $icon = null;
 
     #[ORM\Column]
@@ -45,6 +48,17 @@ class Menu
 
     #[ORM\ManyToOne(inversedBy: 'menus')]
     private ?MenuType $type = null;
+
+    #[Groups(['menu.index'])]
+    #[ORM\Column(length: 100)]
+    private ?string $label = null;
+
+    #[Groups(['menu.index'])]
+    #[ORM\Column(length: 100, nullable: true)]
+    private ?string $link = null;
+
+    #[ORM\Column(length: 255, nullable: true)]
+    private ?string $lucide_icon = null;
 
     public function __construct()
     {
@@ -185,6 +199,42 @@ class Menu
     public function setType(?MenuType $type): static
     {
         $this->type = $type;
+
+        return $this;
+    }
+
+    public function getLabel(): ?string
+    {
+        return $this->label;
+    }
+
+    public function setLabel(string $label): static
+    {
+        $this->label = $label;
+
+        return $this;
+    }
+
+    public function getLink(): ?string
+    {
+        return $this->link;
+    }
+
+    public function setLink(?string $link): static
+    {
+        $this->link = $link;
+
+        return $this;
+    }
+
+    public function getLucideIcon(): ?string
+    {
+        return $this->lucide_icon;
+    }
+
+    public function setLucideIcon(?string $lucide_icon): static
+    {
+        $this->lucide_icon = $lucide_icon;
 
         return $this;
     }

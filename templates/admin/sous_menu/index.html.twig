@@ -1,0 +1,55 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}Sous menu{% endblock %}
+
+{% block body %}
+<twig:Brodcump pageActuel="list" />
+
+<twig:Card:Card>
+    <twig:Card:Header>
+        <twig:H1>Sous menu</twig:H1>
+        <twig:Button link="{{ path('app_admin_sous_menu_new') }}" type="primary">Nouvaux</twig:Button>
+    </twig:Card:Header>
+    <div>
+        <div class="flex justify-end py-2">
+            <twig:Search />
+        </div>
+
+        <twig:Table :thead="['#', 'Title', 'Description', 'Activé', 'Direction', 'Voir plus', 'numero']">
+            {% for key, sous_menu in sous_menus %}
+            <twig:Tr>
+                <twig:Td>{{ key + 1 }}</twig:Td>
+                <twig:Td>{{ sous_menu.title }}</twig:Td>
+                <twig:Td>{{ sous_menu.description | u.truncate(15, "...", true)  }}</twig:Td>
+                <twig:Td>
+                    {% if sous_menu.isActivated %}
+                    <twig:Badget type="primary"> activé </twig:Badget>
+                    {% else %}
+                    <twig:Badget type="danger"> non activé </twig:Badget>
+                    {% endif %}
+                </twig:Td>
+                <twig:Td>{{ sous_menu.direction }}</twig:Td>
+                <twig:Td>
+                    {% if sous_menu.seeMore %}
+                    <twig:Badget type="primary"> activé </twig:Badget>
+                    {% else %}
+                    <twig:Badget type="danger"> non activé </twig:Badget>
+                    {% endif %}
+                </twig:Td>
+                <twig:Td>{{ sous_menu.orders }}</twig:Td>
+                <td>
+                    <twig:ActionButton edit="{{ path('app_admin_sous_menu_edit', {'id': sous_menu.id}) }}"
+                        show="{{ path('app_admin_sous_menu_show', {'id': sous_menu.id}) }}">
+                        {{ include('admin/sous_menu/_delete_form.html.twig') }}
+                    </twig:ActionButton>
+                </td>
+            </twig:Tr>
+            {% else %}
+            <tr>
+                <td colspan="7">no records found</td>
+            </tr>
+            {% endfor %}
+        </twig:Table>
+    </div>
+</twig:Card:Card>
+{% endblock %}
