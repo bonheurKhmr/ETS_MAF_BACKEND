@@ -15,12 +15,13 @@
             <twig:Search />
         </div>
 
-        <twig:Table :thead="['#', 'Title', 'Description', 'Activé', 'Direction', 'Voir plus', 'numero']">
+        <twig:Table :thead="['#', 'menu' , 'Title', 'Description', 'Activé', 'Direction', 'Voir plus', 'numero']">
             {% for key, sous_menu in sous_menus %}
             <twig:Tr>
                 <twig:Td>{{ key + 1 }}</twig:Td>
+                <twig:Td>{{ sous_menu.menu.label }}</twig:Td>
                 <twig:Td>{{ sous_menu.title }}</twig:Td>
-                <twig:Td>{{ sous_menu.description | u.truncate(15, "...", true)  }}</twig:Td>
+                <twig:Td>{{ sous_menu.description | u.truncate(15, "...", true) }}</twig:Td>
                 <twig:Td>
                     {% if sous_menu.isActivated %}
                     <twig:Badget type="primary"> activé </twig:Badget>

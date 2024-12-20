@@ -21,7 +21,7 @@
             <twig:Tr>
                 <twig:Td>{{ key + 1 }}</twig:Td>
                 <twig:Td>{{ service.service }}</twig:Td>
-                <twig:Td>{{ service.description }}</twig:Td>
+                <twig:Td>{{ service.description | u.truncate(15, "...", true) }}</twig:Td>
                 <twig:Td>
                     {% if service.isActivated %}
                     <twig:Badget type="primary"> activé </twig:Badget>

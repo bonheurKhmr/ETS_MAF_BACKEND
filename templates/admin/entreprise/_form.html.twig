@@ -1,0 +1,7 @@
+{{ form_start(form) }}
+    {{ form_widget(form) }}
+    <twig:Button type="primary">
+        <twig:Icon:Save />
+        {{ button_label|default('Enregistre') }}
+    </twig:Button>
+{{ form_end(form) }}

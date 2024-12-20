@@ -20,7 +20,7 @@
             {% for key, menu in menus %}
             <twig:Tr>
                 <twig:Td>{{ key + 1 }}</twig:Td>
-                <twig:Td>{{ menu.icon | raw  }}</twig:Td>
+                <twig:Td> <div class="w-5 h-5"> {{ menu.icon | raw  }} </div> </twig:Td>
                 <twig:Td>
                     {% if menu.name %}
                         <a href="{{ path(menu.name) }}" class="text-primary-600 flex gap-2 items-center">

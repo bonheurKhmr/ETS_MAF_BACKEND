@@ -52,6 +52,17 @@ class SousMenuType extends AbstractType
                     'data-controller' => 'form-collection'
                 ]
             ])
+
+            ->add('menuSousMenus', CollectionType::class, [
+                'entry_type' => MenuSousMenuType::class,
+                'allow_add' => true,
+                'allow_delete' => true,
+                'by_reference' => false,
+                'entry_options' => ['label' => false],
+                'attr' => [
+                    'data-controller' => 'form-collection'
+                ]
+            ])
             ->addEventListener(FormEvents::POST_SUBMIT, $this->AddOtherInput(...))
         ;
     }

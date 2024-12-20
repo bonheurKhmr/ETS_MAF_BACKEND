@@ -59,9 +59,17 @@ class SousMenu
     #[ORM\Column(type: Types::TEXT, nullable: true)]
     private ?string $Icon = null;
 
+    /**
+     * @var Collection<int, MenuSousMenu>
+     */
+    #[Groups(["sous_menu.index"])]
+    #[ORM\OneToMany(targetEntity: MenuSousMenu::class, mappedBy: 'sous_menu', cascade: ['persist'])]
+    private Collection $menuSousMenus;
+
     public function __construct()
     {
         $this->sousMenuImages = new ArrayCollection();
+        $this->menuSousMenus = new ArrayCollection();
     }
 
     public function getId(): ?int
@@ -222,6 +230,36 @@ class SousMenu
     public function setIcon(?string $Icon): static
     {
         $this->Icon = $Icon;
+
+        return $this;
+    }
+
+    /**
+     * @return Collection<int, MenuSousMenu>
+     */
+    public function getMenuSousMenus(): Collection
+    {
+        return $this->menuSousMenus;
+    }
+
+    public function addMenuSousMenu(MenuSousMenu $menuSousMenu): static
+    {
+        if (!$this->menuSousMenus->contains($menuSousMenu)) {
+            $this->menuSousMenus->add($menuSousMenu);
+            $menuSousMenu->setSousMenu($this);
+        }
+
+        return $this;
+    }
+
+    public function removeMenuSousMenu(MenuSousMenu $menuSousMenu): static
+    {
+        if ($this->menuSousMenus->removeElement($menuSousMenu)) {
+            // set the owning side to null (unless already changed)
+            if ($menuSousMenu->getSousMenu() === $this) {
+                $menuSousMenu->setSousMenu(null);
+            }
+        }
 
         return $this;
     }

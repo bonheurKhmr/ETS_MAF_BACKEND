@@ -2,11 +2,12 @@
 
 namespace App\Entity;
 
-use App\Repository\EntrepriseContentRepository;
-use Doctrine\Common\Collections\ArrayCollection;
-use Doctrine\Common\Collections\Collection;
 use Doctrine\DBAL\Types\Types;
 use Doctrine\ORM\Mapping as ORM;
+use Doctrine\Common\Collections\Collection;
+use App\Repository\EntrepriseContentRepository;
+use Doctrine\Common\Collections\ArrayCollection;
+use Symfony\Component\Serializer\Annotation\Groups;
 
 #[ORM\Entity(repositoryClass: EntrepriseContentRepository::class)]
 class EntrepriseContent
@@ -14,14 +15,18 @@ class EntrepriseContent
     #[ORM\Id]
     #[ORM\GeneratedValue]
     #[ORM\Column]
+    #[Groups(['entreprise.index'])]
     private ?int $id = null;
 
+    #[Groups(['entreprise.index'])]
     #[ORM\Column(type: Types::TEXT)]
     private ?string $description = null;
 
+    #[Groups(['entreprise.index'])]
     #[ORM\Column(length: 100)]
     private ?string $title = null;
 
+    #[Groups(['entreprise.index'])]
     #[ORM\Column(type: Types::TEXT, nullable: true)]
     private ?string $svg = null;
 
@@ -36,6 +41,9 @@ class EntrepriseContent
      */
     #[ORM\OneToMany(targetEntity: Entreprise::class, mappedBy: 'content')]
     private Collection $entreprises;
+
+    #[ORM\ManyToOne(inversedBy: 'entrepriseContents')]
+    private ?Entreprise $entreprise = null;
 
     public function __construct()
     {
@@ -133,6 +141,18 @@ class EntrepriseContent
                 $entreprise->setContent(null);
             }
         }
+
+        return $this;
+    }
+
+    public function getEntreprise(): ?Entreprise
+    {
+        return $this->entreprise;
+    }
+
+    public function setEntreprise(?Entreprise $entreprise): static
+    {
+        $this->entreprise = $entreprise;
 
         return $this;
     }

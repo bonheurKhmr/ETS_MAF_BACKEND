@@ -1,0 +1,41 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}Contact{% endblock %}
+
+{% block body %}
+<twig:Brodcump pageActuel="list" />
+
+
+<twig:Card:Card>
+    <twig:Card:Header>
+        <twig:H1>contact</twig:H1>
+        <twig:Button link="{{ path('app_admin_contact_new') }}" type="primary">Nouvaux</twig:Button>
+    </twig:Card:Header>
+    <div>
+        <div class="flex justify-end py-2">
+            <twig:Search />
+        </div>
+
+        <twig:Table :thead="['#','Icon', 'label', 'contact']">
+            {% for key, contact in contacts %}
+            <twig:Tr>
+                <twig:Td>{{ key + 1 }}</twig:Td>
+                <twig:Td> <div class="w-5 h-5"> {{ contact.icon | raw  }} </div> </twig:Td>
+                <twig:Td>{{ contact.label }}</twig:Td>
+                <twig:Td>{{ contact.contact }}</twig:Td>
+                <td>
+                    <twig:ActionButton edit="{{ path('app_admin_contact_edit', {'id': contact.id}) }}"
+                        show="{{ path('app_admin_contact_show', {'id': contact.id}) }}">
+                        {{ include('admin/contact/_delete_form.html.twig') }}
+                    </twig:ActionButton>
+                </td>
+            </twig:Tr>
+            {% else %}
+            <tr>
+                <td colspan="4">no records found</td>
+            </tr>
+            {% endfor %}
+        </twig:Table>
+    </div>
+</twig:Card:Card>
+{% endblock %}

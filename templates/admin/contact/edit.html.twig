@@ -1,0 +1,18 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}Edit Contact{% endblock %}
+
+{% block body %}
+<twig:Brodcump firstLink="app_admin_contact_index" firstLabel="Liste" pageActuel="Editer" />
+
+<twig:Card:Card>
+    <twig:Card:Header>
+        <twig:H1>Modifier le contact</twig:H1>
+    </twig:Card:Header>
+    <div class="p-3">
+        {{ include('admin/contact/_form.html.twig', {'button_label': 'Mettre à jour'}) }}
+        {{ include('admin/contact/_delete_form.html.twig') }}
+    </div>
+</twig:Card:Card>
+
+{% endblock %}

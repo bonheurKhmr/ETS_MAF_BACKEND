@@ -1,0 +1,48 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}Entreprise{% endblock %}
+
+{% block body %}
+<twig:Brodcump pageActuel="list" />
+
+
+<twig:Card:Card>
+    <twig:Card:Header>
+        <twig:H1>entreprise</twig:H1>
+        <twig:Button link="{{ path('app_admin_entreprise_new') }}" type="primary">Nouvaux</twig:Button>
+    </twig:Card:Header>
+    <div>
+        <div class="flex justify-end py-2">
+            <twig:Search />
+        </div>
+
+        <twig:Table :thead="['#','Logo', 'name', 'a.name', 'Activated']">
+            {% for key, entreprise in entreprises %}
+            <twig:Tr>
+                <twig:Td>{{ key + 1 }}</twig:Td>
+                <twig:Td>{{ entreprise.logo }}</twig:Td>
+                <twig:Td>{{ entreprise.name }}</twig:Td>
+                <twig:Td>{{ entreprise.litleName }}</twig:Td>
+                <twig:Td>
+                    {% if entreprise.activated %}
+                    <twig:Badget type="primary"> activé </twig:Badget>
+                    {% else %}
+                    <twig:Badget type="danger"> non activé </twig:Badget>
+                    {% endif %}
+                </twig:Td>
+                <td>
+                    <twig:ActionButton edit="{{ path('app_admin_entreprise_edit', {'id': entreprise.id}) }}"
+                        show="{{ path('app_admin_entreprise_show', {'id': entreprise.id}) }}">
+                        {{ include('admin/entreprise/_delete_form.html.twig') }}
+                    </twig:ActionButton>
+                </td>
+            </twig:Tr>
+            {% else %}
+            <tr>
+                <td colspan="7">no records found</td>
+            </tr>
+            {% endfor %}
+        </twig:Table>
+    </div>
+</twig:Card:Card>
+{% endblock %}

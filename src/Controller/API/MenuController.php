@@ -7,6 +7,7 @@ use App\Repository\MenuTypeRepository;
 use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\Routing\Attribute\Route;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
+use Symfony\Component\HttpFoundation\Request;
 
 #[Route(path: '/api/menu')]
 final class MenuController extends AbstractController
@@ -17,14 +18,13 @@ final class MenuController extends AbstractController
     ) {}
 
     #[Route(name: 'app_api_menu', methods: ["GET"])]
-    public function index(): Response
+    public function index(Request $request): Response
     {
         $data = $this
             ->menuRepository->findBy([
                 "type" => $this->menuTypeRepository->findOneBy(['type' => 'frontend navbar']),
                 "is_activated" => true
             ],["orders" => "ASC"]);
-
         return $this->json(["data" => $data], 200, [], [
             "groups" => ["menu.index"]
         ]);

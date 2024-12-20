@@ -3,9 +3,12 @@
 namespace App\Entity;
 
 use App\Repository\ServiceRepository;
+use Doctrine\Common\Collections\ArrayCollection;
+use Doctrine\Common\Collections\Collection;
 use Doctrine\DBAL\Types\Types;
 use Doctrine\ORM\Mapping as ORM;
 use Symfony\Component\HttpFoundation\File\File;
+use Symfony\Component\Serializer\Attribute\Groups;
 use Vich\UploaderBundle\Mapping\Annotation as Vich;
 
 #[ORM\Entity(repositoryClass: ServiceRepository::class)]
@@ -15,14 +18,18 @@ class Service
     #[ORM\Id]
     #[ORM\GeneratedValue]
     #[ORM\Column]
+    #[Groups(["service.index"])]
     private ?int $id = null;
 
+    #[Groups(["service.index"])]
     #[ORM\Column(length: 100)]
     private ?string $service = null;
 
+    #[Groups(["service.index"])]
     #[ORM\Column(type: Types::TEXT)]
     private ?string $description = null;
 
+    #[Groups(["service.index"])]
     #[ORM\Column(length: 255)]
     private ?string $image = null;
 
@@ -40,6 +47,18 @@ class Service
 
     #[ORM\ManyToOne(inversedBy: 'services')]
     private ?SerciveFiles $file = null;
+
+    /**
+     * @var Collection<int, SerciveFiles>
+     */
+    #[Groups(["service.index"])]
+    #[ORM\OneToMany(targetEntity: SerciveFiles::class, mappedBy: 'service', cascade: ['persist'])]
+    private Collection $serciveFiles;
+
+    public function __construct()
+    {
+        $this->serciveFiles = new ArrayCollection();
+    }
 
     public function getId(): ?int
     {
@@ -153,6 +172,36 @@ class Service
     public function setFile(?SerciveFiles $file): static
     {
         $this->file = $file;
+
+        return $this;
+    }
+
+    /**
+     * @return Collection<int, SerciveFiles>
+     */
+    public function getSerciveFiles(): Collection
+    {
+        return $this->serciveFiles;
+    }
+
+    public function addSerciveFile(SerciveFiles $serciveFile): static
+    {
+        if (!$this->serciveFiles->contains($serciveFile)) {
+            $this->serciveFiles->add($serciveFile);
+            $serciveFile->setService($this);
+        }
+
+        return $this;
+    }
+
+    public function removeSerciveFile(SerciveFiles $serciveFile): static
+    {
+        if ($this->serciveFiles->removeElement($serciveFile)) {
+            // set the owning side to null (unless already changed)
+            if ($serciveFile->getService() === $this) {
+                $serciveFile->setService(null);
+            }
+        }
 
         return $this;
     }
