@@ -20,7 +20,12 @@
             {% for key, entreprise in entreprises %}
             <twig:Tr>
                 <twig:Td>{{ key + 1 }}</twig:Td>
-                <twig:Td>{{ entreprise.logo }}</twig:Td>
+                <twig:Td>
+                    <img 
+                        class="w-10 h-10 rounded-full border-2 border-white"
+                        src="{{ vich_uploader_asset(entreprise, "logoFile") }}" 
+                        alt="">
+                </twig:Td>
                 <twig:Td>{{ entreprise.name }}</twig:Td>
                 <twig:Td>{{ entreprise.litleName }}</twig:Td>
                 <twig:Td>

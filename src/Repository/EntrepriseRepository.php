@@ -16,6 +16,14 @@ class EntrepriseRepository extends ServiceEntityRepository
         parent::__construct($registry, Entreprise::class);
     }
 
+    public function getActivatedEntreprise () {
+        return $this->createQueryBuilder('e')
+            ->andWhere('e.activated = 1')
+            ->orderBy('e.id', 'DESC')
+            ->getQuery()
+            ->getOneOrNullResult();
+    }
+
     //    /**
     //     * @return Entreprise[] Returns an array of Entreprise objects
     //     */

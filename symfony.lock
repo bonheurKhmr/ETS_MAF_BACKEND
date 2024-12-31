@@ -291,6 +291,18 @@
     "symfony/ux-dropzone": {
         "version": "v2.22.0"
     },
+    "symfony/ux-react": {
+        "version": "2.22",
+        "recipe": {
+            "repo": "github.com/symfony/recipes",
+            "branch": "main",
+            "version": "2.9",
+            "ref": "e970076b31d602ae6e2106cf91a82c7e1f7ddff2"
+        },
+        "files": [
+            "assets/react/controllers/Hello.jsx"
+        ]
+    },
     "symfony/ux-turbo": {
         "version": "2.22",
         "recipe": {
@@ -352,6 +364,15 @@
             "package.json",
             "webpack.config.js"
         ]
+    },
+    "tales-from-a-dev/flowbite-bundle": {
+        "version": "0.7",
+        "recipe": {
+            "repo": "github.com/symfony/recipes-contrib",
+            "branch": "main",
+            "version": "0.4",
+            "ref": "8c5eef17730535682128557a1016872fd3e81c33"
+        }
     },
     "tales-from-a-dev/twig-tailwind-extra": {
         "version": "0.3",

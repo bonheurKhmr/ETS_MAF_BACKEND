@@ -1,0 +1,20 @@
+<div class="flex flex-col bg-blue-50 px-3">
+    <div class="max-w-screen-sm mx-auto">
+        {% for sousMenu in sousMenus %}
+        <twig:Front:Card:Card class="my-2">
+            <twig:Front:Card:CardHeader>
+                <twig:Front:Card:CardTitle> {{ sousMenu.title }} </twig:Front:Card:CardTitle>
+            </twig:Front:Card:CardHeader>
+
+            <twig:Front:Card:CardBody>
+                {{ sousMenu.description }}
+                <div {{ stimulus_controller("slide-image") }} class="max-w-sm sm:flex gap-2">
+                    {% for image in sousMenu.sousMenuImages %}
+                    <img class="w-full" src="{{ vich_uploader_asset(image, "srcFile") }}" alt="{{ image.content }}">
+                    {% endfor %}
+                </div>
+            </twig:Front:Card:CardBody>
+        </twig:Front:Card:Card>
+        {% endfor %}
+    </div>
+</div>
