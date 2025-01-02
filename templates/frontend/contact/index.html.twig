@@ -1,0 +1,63 @@
+{% extends 'frontend/base.html.twig' %}
+
+{% block title %}Nous contacter{% endblock %}
+
+{% block body %}
+{{ include('/frontend/includes/_content.html.twig', {'sousMenus': sousMenus}) }}
+<!-- les formulairee de contacte -->
+<div class="sm:grid grid-cols-2 max-w-screen-sm mx-auto gap-3 my-3 px-3">
+    <!-- les contacts -->
+    <div class="pb-3 sm:pb-0">
+        {% for contact in contacts %}
+        <div
+            class="flex gap-2 items-center py-3 px-1.5 hover:bg-primary-200 cursor-pointer bg-primary-100 border border-primary-100 rounded-md text-black/70">
+            <div class="w-4 h-4"> {{ contact.icon | raw }} </div>
+            <div> {{ contact.contact }} </div>
+        </div>
+        {% endfor %}
+    </div>
+
+
+    <!-- formulaire de contacte -->
+    <form action="#">
+        <div>
+            <label for="first_name" class="block mb-2 text-sm font-medium text-gray-900 dark:text-white">
+                Nom complet
+            </label>
+            <input type="text" id="first_name"
+                class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500"
+                placeholder="John doe" required />
+        </div>
+
+        <div>
+            <label for="first_name" class="block mb-2 text-sm font-medium text-gray-900 dark:text-white">
+                Email
+            </label>
+            <input type="email" id="first_name"
+                class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500"
+                placeholder="johndoe@example.com" required />
+        </div>
+
+        <div>
+            <label for="message" class="block mb-2 text-sm font-medium text-gray-900 dark:text-white">Your
+                message</label>
+            <textarea id="message" rows="4"
+                class="block p-2.5 w-full text-sm text-gray-900 bg-gray-50 rounded-lg border border-gray-300 focus:ring-blue-500 focus:border-blue-500 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500"
+                placeholder="Write your thoughts here..."></textarea>
+        </div>
+
+        <button class="bg-primary py-3 px-4 text-sm font-bold rounded-lg z-20 text-black/80 inline-block w-full my-3">
+            <div class="flex items-center gap-2 w-full justify-center">
+                <span>
+                    <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor"
+                        class="bi bi-send" viewBox="0 0 16 16">
+                        <path
+                            d="M15.854.146a.5.5 0 0 1 .11.54l-5.819 14.547a.75.75 0 0 1-1.329.124l-3.178-4.995L.643 7.184a.75.75 0 0 1 .124-1.33L15.314.037a.5.5 0 0 1 .54.11ZM6.636 10.07l2.761 4.338L14.13 2.576zm6.787-8.201L1.591 6.602l4.339 2.76z" />
+                    </svg>
+                </span>
+                <span>Envoyer votre message</span>
+            </div>
+        </button>
+    </form>
+</div>
+{% endblock %}

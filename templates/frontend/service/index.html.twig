@@ -1,0 +1,38 @@
+{% extends 'frontend/base.html.twig' %}
+
+{% block title %}Services{% endblock %}
+
+{% block body %}
+{{ include('/frontend/includes/_content.html.twig', {'sousMenus': sousMenus}) }}
+
+<div class="flex flex-col bg-blue-50 px-3 ">
+    <div class="max-w-screen-sm mx-auto">
+        <h2 class="text-center uppercase font-bold text-2xl text-primary border-b-2 border-primary py-2"> Nous
+            Differents services </h2>
+        <div class="sm:grid grid-cols-2 gap-3">
+            {% for service in services %}
+            <twig:Front:Card:Card class="my-2">
+                <twig:Front:Card:CardHeader>
+                    <twig:Front:Card:CardTitle> {{ service.service }} </twig:Front:Card:CardTitle>
+                </twig:Front:Card:CardHeader>
+
+                <twig:Front:Card:CardBody>
+                    <article class="py-4 text-black/70">
+                        {{ service.description }}
+                    </article>
+                    {# <div {{ stimulus_controller("slide-image") }} class="max-w-sm sm:flex gap-2">
+                    {% for image in sousMenu.sousMenuImages %}
+                    <img class="w-full" src="{{ vich_uploader_asset(image, "srcFile") }}" alt="{{ image.content }}">
+                    {% endfor %}
+                </div> #}
+                    <button class="bg-primary py-3 px-4 text-sm font-bold rounded-lg z-20 text-black/80">
+                        plus de detail
+                    </button>
+                </twig:Front:Card:CardBody>
+            </twig:Front:Card:Card>
+            {% endfor %}
+        </div>
+    </div>
+</div>
+
+{% endblock %}

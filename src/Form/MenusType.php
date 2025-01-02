@@ -24,6 +24,7 @@ class MenusType extends AbstractType
             ->add('description', TextareaType::class, ["required" => false])
             ->add('icon', TextareaType::class, ["required" => false])
             ->add('is_activated')
+            ->add('is_activated')
             ->add('orders')
             ->add('type', EntityType::class, [
                 'class' => MenuType::class,

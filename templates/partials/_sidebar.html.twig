@@ -14,6 +14,11 @@
 <aside id="separator-sidebar"
     class="fixed top-0 left-0 z-40 w-64 h-screen transition-transform -translate-x-full sm:translate-x-0"
     aria-label="Sidebar">
+    <div>
+        <a href="{{ path("app_home") }}" class="bg-secondary w-full py-3 inline-block px-3">
+            <span class="ms-3 text-3xl text-primary font-bold"> Ets MAF </span>
+        </a>
+    </div>
     <div class="h-full py-4 overflow-y-auto bg-gray-100 dark:bg-gray-800">
         <ul class="space-y-2 font-medium">
             {% for menu in menus %}

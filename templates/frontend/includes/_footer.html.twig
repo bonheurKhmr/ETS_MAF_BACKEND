@@ -1,10 +1,170 @@
+{% set menus = menu_service.getFrontendMenu %}
+{% set services = menu_service.getServices %}
+{% set contacts = menu_service.getAllContacts %}
+{% set header = menu_service.getHeaderData %}
+
 <div class="bg-tiersary pb-20 px-3 pt-3 sm:pb-3">
-    <div class="max-w-screen-sm mx-auto">
-        <h2> Footer </h2>
-        <p>
-            Lorem ipsum dolor sit amet, consectetur adipisicing elit. Aut accusamus culpa aliquam unde possimus fugit
-            voluptatibus nam molestiae, tenetur praesentium esse nulla facilis ex iure, eos eaque repellendus placeat
-            enim?
-        </p>
+    <div class="max-w-screen-sm mx-auto sm:grid grid-cols-3">
+        <div>
+            <h2 class="text-xl font-bold py-3"> Menus </h2>
+            <ul>
+                {% for menu in menus %}
+                <li class="">
+                    <a href="{{ menu.name ? path(menu.name) : "#" }}"
+                        class="flex items-center gap-2 text-black/70 hover:text-primary transition-all whitespace-nowrap">
+                        <span class="w-4 h-4 block">{{ menu.icon | raw }} </span>
+                        <span>{{ menu.label }}</span>
+                    </a>
+                </li>
+                {% endfor %}
+            </ul>
+        </div>
+
+        <div>
+            <h2 class="text-xl font-bold py-3"> Services </h2>
+            <ul>
+                {% for service in services %}
+                <li class="">
+                    <div class="flex items-center gap-2">
+                        <!-- icon -->
+                        <span>
+                            <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor"
+                                class="bi bi-arrow-right-short" viewBox="0 0 16 16">
+                                <path fill-rule="evenodd"
+                                    d="M4 8a.5.5 0 0 1 .5-.5h5.793L8.146 5.354a.5.5 0 1 1 .708-.708l3 3a.5.5 0 0 1 0 .708l-3 3a.5.5 0 0 1-.708-.708L10.293 8.5H4.5A.5.5 0 0 1 4 8" />
+                            </svg>
+                        </span>
+                        <span>{{ service.service }}</span>
+                    </div>
+                </li>
+                {% endfor %}
+            </ul>
+        </div>
+
+        <div>
+            <h2 class="text-xl font-bold py-3"> Nos Contact </h2>
+            <ul>
+                {% for contact in contacts %}
+                <li class="flex items-center gap-2">
+                    <!-- icon -->
+                    <div class="w-4 h-4 inline-flex"> {{ contact.icon | raw }} </div>
+                    <span>{{ contact.contact }}</span>
+                </li>
+                {% endfor %}
+            </ul>
+        </div>
+
+        <div>
+            <h2 class="text-xl font-bold py-3"> Nos Adresses </h2>
+            <table class="w-full">
+                <tr>
+                    <td>
+                        <div class="flex items-center gap-2">
+                            <span>
+                                <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor"
+                                    class="bi bi-arrow-right-short" viewBox="0 0 16 16">
+                                    <path fill-rule="evenodd"
+                                        d="M4 8a.5.5 0 0 1 .5-.5h5.793L8.146 5.354a.5.5 0 1 1 .708-.708l3 3a.5.5 0 0 1 0 .708l-3 3a.5.5 0 0 1-.708-.708L10.293 8.5H4.5A.5.5 0 0 1 4 8" />
+                                </svg>
+                            </span>
+                            <span>rccm</span>
+                        </div>
+                    </td>
+                    <td> {{ header.rccm }} </td>
+                </tr>
+
+                <tr>
+                    <td>
+                        <div class="flex items-center gap-2">
+                            <span>
+                                <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor"
+                                    class="bi bi-arrow-right-short" viewBox="0 0 16 16">
+                                    <path fill-rule="evenodd"
+                                        d="M4 8a.5.5 0 0 1 .5-.5h5.793L8.146 5.354a.5.5 0 1 1 .708-.708l3 3a.5.5 0 0 1 0 .708l-3 3a.5.5 0 0 1-.708-.708L10.293 8.5H4.5A.5.5 0 0 1 4 8" />
+                                </svg>
+                            </span>
+                            <span>Pays</span>
+                        </div>
+                    </td>
+                    <td> {{ header.Pays }} </td>
+                </tr>
+
+                <tr>
+                    <td>
+                        <div class="flex items-center gap-2">
+                            <span>
+                                <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor"
+                                    class="bi bi-arrow-right-short" viewBox="0 0 16 16">
+                                    <path fill-rule="evenodd"
+                                        d="M4 8a.5.5 0 0 1 .5-.5h5.793L8.146 5.354a.5.5 0 1 1 .708-.708l3 3a.5.5 0 0 1 0 .708l-3 3a.5.5 0 0 1-.708-.708L10.293 8.5H4.5A.5.5 0 0 1 4 8" />
+                                </svg>
+                            </span>
+                            <span>province</span>
+                    </td>
+        </div>
+        <td> {{ header.province }} </td>
+        </tr>
+
+        <tr>
+            <td>
+                <div class="flex items-center gap-2">
+                    <span>
+                        <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor"
+                            class="bi bi-arrow-right-short" viewBox="0 0 16 16">
+                            <path fill-rule="evenodd"
+                                d="M4 8a.5.5 0 0 1 .5-.5h5.793L8.146 5.354a.5.5 0 1 1 .708-.708l3 3a.5.5 0 0 1 0 .708l-3 3a.5.5 0 0 1-.708-.708L10.293 8.5H4.5A.5.5 0 0 1 4 8" />
+                        </svg>
+                    </span>
+                    <span>vile</span>
+                </div>
+            </td>
+            <td> {{ header.vile }} </td>
+        </tr>
+
+        <tr>
+            <td>
+                <div class="flex items-center gap-2">
+                    <span>
+                        <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor"
+                            class="bi bi-arrow-right-short" viewBox="0 0 16 16">
+                            <path fill-rule="evenodd"
+                                d="M4 8a.5.5 0 0 1 .5-.5h5.793L8.146 5.354a.5.5 0 1 1 .708-.708l3 3a.5.5 0 0 1 0 .708l-3 3a.5.5 0 0 1-.708-.708L10.293 8.5H4.5A.5.5 0 0 1 4 8" />
+                        </svg>
+                    </span>
+                    <span>commune</span>
+                </div>
+            </td>
+            <td> {{ header.commune }} </td>
+        </tr>
+
+        <tr>
+            <td>
+                <div class="flex items-center gap-2">
+                    <span>
+                        <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor"
+                            class="bi bi-arrow-right-short" viewBox="0 0 16 16">
+                            <path fill-rule="evenodd"
+                                d="M4 8a.5.5 0 0 1 .5-.5h5.793L8.146 5.354a.5.5 0 1 1 .708-.708l3 3a.5.5 0 0 1 0 .708l-3 3a.5.5 0 0 1-.708-.708L10.293 8.5H4.5A.5.5 0 0 1 4 8" />
+                        </svg>
+                    </span>
+                    <span>avenue</span>
+                </div>
+            </td>
+            <td> {{ header.avenue }} </td>
+        </tr>
+        </table>
+        <div>
+            <a href="{{ path("app_admin_dashboard") }}" class="flex items-center gap-3">
+                <span>
+                    <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor"
+                        class="bi bi-arrow-right-short" viewBox="0 0 16 16">
+                        <path fill-rule="evenodd"
+                            d="M4 8a.5.5 0 0 1 .5-.5h5.793L8.146 5.354a.5.5 0 1 1 .708-.708l3 3a.5.5 0 0 1 0 .708l-3 3a.5.5 0 0 1-.708-.708L10.293 8.5H4.5A.5.5 0 0 1 4 8" />
+                    </svg>
+                </span>
+                <span>Administration </span>
+            </a>
+        </div>
     </div>
+</div>
 </div>
