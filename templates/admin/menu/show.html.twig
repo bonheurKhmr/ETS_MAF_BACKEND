@@ -11,40 +11,91 @@
     </twig:Card:Header>
 
     <twig:Card:Body class="p-3">
-        <table class="table">
-            <tbody>
-                <tr>
-                    <th>Id</th>
-                    <td>{{ menu.id }}</td>
-                </tr>
-                <tr>
-                    <th>Name</th>
-                    <td>{{ menu.name }}</td>
-                </tr>
-                <tr>
-                    <th>Description</th>
-                    <td>{{ menu.description }}</td>
-                </tr>
-                <tr>
-                    <th>Icon</th>
-                    <td>{{ menu.icon }}</td>
-                </tr>
-                <tr>
-                    <th>Is_activated</th>
-                    <td>
-                        {% if menu.isActivated %}
-                        <twig:Badget type="primary"> activé </twig:Badget>
+        <div class="grid grid-cols-2 gap-6">
+            <twig:Table :action="false">
+                <tbody>
+                    <twig:Tr>
+                        <th>Name</th>
+                        <twig:Td>{{ menu.name }}</twig:Td>
+                    </twig:Tr>
+
+                    <twig:Tr>
+                        <th>Lable</th>
+                        <twig:Td>{{ menu.label }}</twig:Td>
+                    </twig:Tr>
+                    <twig:Tr>
+                        <th>Description</th>
+                        <twig:Td>{{ menu.description }}</twig:Td>
+                    </twig:Tr>
+                    <twig:Tr>
+                        <th>Icon</th>
+                        <twig:Td>
+                            <div class="w-6 h-6"> {{ menu.icon | raw }} </div>
+                        </twig:Td>
+                    </twig:Tr>
+                    <twig:Tr>
+                        <th>Is_activated</th>
+                        <twig:Td>
+                            {% if menu.isActivated %}
+                            <twig:Badget type="primary"> activé </twig:Badget>
+                            {% else %}
+                            <twig:Badget type="danger"> non activé </twig:Badget>
+                            {% endif %}
+                        </twig:Td>
+                    </twig:Tr>
+                    <twig:Tr>
+                        <th>Orders</th>
+                        <twig:Td>
+                            <twig:Badget type="primary"> {{ menu.orders }} </twig:Badget>
+                        </twig:Td>
+                    </twig:Tr>
+
+                    <twig:Tr>
+                        <th>Type de menu</th>
+                        <twig:Td>{{ menu.type.type }}</twig:Td>
+                    </twig:Tr>
+                </tbody>
+            </twig:Table>
+
+            <twig:Card:Card>
+                <twig:Card:Header>
+                    <twig:Card:CardTitle> sous menus </twig:Card:CardTitle>
+                </twig:Card:Header>
+
+                <twig:Card:Body>
+                    <twig:Table :thead="['#', 'title']">
+                        {% for key, item in menu.sousMenus %}
+                        <twig:Tr>
+                            <twig:Td> {{ key + 1 }} </twig:Td>
+                            <twig:Td> {{ item.title }} </twig:Td>
+                            <twig:Td>
+                                <div class="flex items-center justify-end gap-2.5">
+                                    <a href="{{ path('app_admin_sous_menu_edit', {'id': item.id}) }}"
+                                        class="border border-gray-300 bg-gray-100 text-gray-70 px-4 py-1.5 rounded-md my-2">
+                                        <twig:Icon:Edit />
+                                    </a>
+
+                                    <form method="post"
+                                        action="{{ path('app_admin_sous_menu_delete', {'id': item.id}) }}"
+                                        onsubmit="return confirm('Are you sure you want to delete this item?');">
+                                        <input type="hidden" name="_token" value="{{ csrf_token('delete' ~ item.id) }}">
+                                        <button
+                                            class="border border-red-800 bg-red-500 text-red-50 px-4 py-1.5 rounded-md my-2">
+                                            <twig:Icon:Delete />
+                                        </button>
+                                    </form>
+                                </div>
+                            </twig:Td>
+                        </twig:Tr>
                         {% else %}
-                        <twig:Badget type="danger"> non activé </twig:Badget>
-                        {% endif %}
-                    </td>
-                </tr>
-                <tr>
-                    <th>Orders</th>
-                    <td>{{ menu.orders }}</td>
-                </tr>
-            </tbody>
-        </table>
+                        <tr>
+                            <td colspan="3">Auccune sous menu Associé</td>
+                        </tr>
+                        {% endfor %}
+                    </twig:Table>
+                </twig:Card:Body>
+            </twig:Card:Card>
+        </div>
     </twig:Card:Body>
 
     <twig:Card:Footer class="flex items-center gap-2 p-3">

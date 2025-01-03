@@ -28,9 +28,7 @@ class SousMenuType extends AbstractType
             ->add('title')
             ->add('description')
             ->add('is_activated')
-            ->add('see_more')
             ->add('orders', NumberType::class)
-            ->add('direction')
             ->add('icon', TextareaType::class, ["required" => false])
             ->add('menu', EntityType::class, [
                 'class' => Menu::class,

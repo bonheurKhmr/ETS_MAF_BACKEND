@@ -6,11 +6,13 @@
                 <twig:Front:Card:CardTitle> {{ sousMenu.title }} </twig:Front:Card:CardTitle>
             </twig:Front:Card:CardHeader>
 
-            <twig:Front:Card:CardBody>
+            <!-- les Images qui sont afficher a un menu particuliere -->
+            <twig:Front:Card:CardBody class="">
                 {{ sousMenu.description }}
-                <div {{ stimulus_controller("slide-image") }} class="max-w-sm sm:flex gap-2">
+                <div {{ stimulus_controller("slide-image") }} class="sm:grid grid-cols-2 gap-3">
                     {% for image in sousMenu.sousMenuImages %}
-                    <img class="w-full" src="{{ vich_uploader_asset(image, "srcFile") }}" alt="{{ image.content }}">
+                    <img class="w-full h-full border border-primary rounded-md"
+                        src="{{ vich_uploader_asset(image, "srcFile") }}" alt="{{ image.content }}">
                     {% endfor %}
                 </div>
             </twig:Front:Card:CardBody>

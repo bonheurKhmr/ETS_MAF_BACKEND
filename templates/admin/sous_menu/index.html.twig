@@ -15,7 +15,7 @@
             <twig:Search />
         </div>
 
-        <twig:Table :thead="['#', 'menu' , 'Title', 'Description', 'Activé', 'Direction', 'Voir plus', 'numero']">
+        <twig:Table :thead="['#', 'menu' , 'Title', 'Description', 'Activé', 'numero']">
             {% for key, sous_menu in sous_menus %}
             <twig:Tr>
                 <twig:Td>{{ key + 1 }}</twig:Td>
@@ -24,14 +24,6 @@
                 <twig:Td>{{ sous_menu.description | u.truncate(15, "...", true) }}</twig:Td>
                 <twig:Td>
                     {% if sous_menu.isActivated %}
-                    <twig:Badget type="primary"> activé </twig:Badget>
-                    {% else %}
-                    <twig:Badget type="danger"> non activé </twig:Badget>
-                    {% endif %}
-                </twig:Td>
-                <twig:Td>{{ sous_menu.direction }}</twig:Td>
-                <twig:Td>
-                    {% if sous_menu.seeMore %}
                     <twig:Badget type="primary"> activé </twig:Badget>
                     {% else %}
                     <twig:Badget type="danger"> non activé </twig:Badget>

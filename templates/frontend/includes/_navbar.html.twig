@@ -15,7 +15,7 @@
                     <img class="w-8 h-8" src="{{ vich_uploader_asset(header, "logoFile") }}" alt="{{ header.name }}">
                     <span class="text-primary font-bold text-2xl"> {{ header.litleName }} </span>
                 </div>
-                <ul class="flex sm:gap-3 gap-1.5">
+                <ul class="flex sm:gap-3 gap-2.5">
                     {% for menu in menus %}
                     <li>
                         <a href="{{ menu.name ? path(menu.name) : "#" }}"

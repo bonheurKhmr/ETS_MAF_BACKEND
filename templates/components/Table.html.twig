@@ -6,9 +6,12 @@
                     <thead class="border-b border-neutral-200 font-medium dark:border-white/10">
                         <tr class="whitespace-nowrap">
                             {% for head in thead %}
-                                <th scope="col" class="px-6 py-4"> {{ head }} </th>
+                            <th scope="col" class="px-6 py-4"> {{ head }} </th>
                             {% endfor %}
+
+                            {% if action %}
                             <th scope="col" class="px-6 py-4 text-end"> Action </th>
+                            {% endif %}
                         </tr>
                     </thead>
                     <tbody>

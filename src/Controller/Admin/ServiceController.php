@@ -71,6 +71,11 @@ final class ServiceController extends AbstractController
     #[Route('/{id}', name: 'app_admin_service_delete', methods: ['POST'])]
     public function delete(Request $request, Service $service, EntityManagerInterface $entityManager): Response
     {
+        if ($service->getSerciveFiles()[0] !== null) {
+            //on a une erreur on supprimer dabord les relation lier
+            echo "erreur";
+            die;
+        }
         if ($this->isCsrfTokenValid('delete'.$service->getId(), $request->getPayload()->getString('_token'))) {
             $entityManager->remove($service);
             $entityManager->flush();

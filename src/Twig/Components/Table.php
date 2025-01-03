@@ -8,4 +8,5 @@ use Symfony\UX\TwigComponent\Attribute\AsTwigComponent;
 final class Table
 {
     public array $thead = [];
+    public bool $action = true;
 }

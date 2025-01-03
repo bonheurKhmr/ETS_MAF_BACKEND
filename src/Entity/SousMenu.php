@@ -45,13 +45,6 @@ class SousMenu
     #[ORM\OneToMany(targetEntity: SousMenuImages::class, mappedBy: 'sous_menu', cascade: ['persist'])]
     private Collection $sousMenuImages;
 
-    #[ORM\Column(length: 10)]
-    private ?string $direction = null;
-
-    #[ORM\Column]
-    #[Groups(["sous_menu.index"])]
-    private ?bool $see_more = null;
-
     #[ORM\Column]
     private ?int $orders = null;
 
@@ -182,30 +175,6 @@ class SousMenu
                 $sousMenuImage->setSousMenu(null);
             }
         }
-
-        return $this;
-    }
-
-    public function getDirection(): ?string
-    {
-        return $this->direction;
-    }
-
-    public function setDirection(string $direction): static
-    {
-        $this->direction = $direction;
-
-        return $this;
-    }
-
-    public function isSeeMore(): ?bool
-    {
-        return $this->see_more;
-    }
-
-    public function setSeeMore(bool $see_more): static
-    {
-        $this->see_more = $see_more;
 
         return $this;
     }
