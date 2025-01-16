@@ -2,39 +2,39 @@
 
 namespace App\Repository;
 
-use App\Entity\SousMenuImages;
+use App\Entity\Telephone;
 use Doctrine\Bundle\DoctrineBundle\Repository\ServiceEntityRepository;
 use Doctrine\Persistence\ManagerRegistry;
 
 /**
- * @extends ServiceEntityRepository<SousMenuImages>
+ * @extends ServiceEntityRepository<Telephone>
  */
-class SousMenuImagesRepository extends ServiceEntityRepository
+class TelephoneRepository extends ServiceEntityRepository
 {
     public function __construct(ManagerRegistry $registry)
     {
-        parent::__construct($registry, SousMenuImages::class);
+        parent::__construct($registry, Telephone::class);
     }
 
     //    /**
-    //     * @return SousMenuImages[] Returns an array of SousMenuImages objects
+    //     * @return Telephone[] Returns an array of Telephone objects
     //     */
     //    public function findByExampleField($value): array
     //    {
-    //        return $this->createQueryBuilder('s')
-    //            ->andWhere('s.exampleField = :val')
+    //        return $this->createQueryBuilder('t')
+    //            ->andWhere('t.exampleField = :val')
     //            ->setParameter('val', $value)
-    //            ->orderBy('s.id', 'ASC')
+    //            ->orderBy('t.id', 'ASC')
     //            ->setMaxResults(10)
     //            ->getQuery()
     //            ->getResult()
     //        ;
     //    }
 
-    //    public function findOneBySomeField($value): ?SousMenuImages
+    //    public function findOneBySomeField($value): ?Telephone
     //    {
-    //        return $this->createQueryBuilder('s')
-    //            ->andWhere('s.exampleField = :val')
+    //        return $this->createQueryBuilder('t')
+    //            ->andWhere('t.exampleField = :val')
     //            ->setParameter('val', $value)
     //            ->getQuery()
     //            ->getOneOrNullResult()

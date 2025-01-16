@@ -11,63 +11,36 @@
     </twig:Card:Header>
 
     <twig:Card:Body class="p-3">
-        <div class="grid grid-cols-2 gap-6">
-            <twig:Table :action="false">
-                <tbody>
-                    <twig:Tr>
-                        <th>Title</th>
-                        <twig:Td>{{ sous_menu.title }}</twig:Td>
-                    </twig:Tr>
+        <twig:Table :action="false">
+            <tbody>
+                <twig:Tr>
+                    <th>Title</th>
+                    <twig:Td>{{ sous_menu.title }}</twig:Td>
+                </twig:Tr>
 
-                    <twig:Tr>
-                        <th>Menu</th>
-                        <twig:Td>{{ sous_menu.menu.label }}</twig:Td>
-                    </twig:Tr>
+                <twig:Tr>
+                    <th>Menu</th>
+                    <twig:Td>{{ sous_menu.menu.label }}</twig:Td>
+                </twig:Tr>
 
-                    <twig:Tr>
-                        <th>Description</th>
-                        <twig:Td>
-                            <div class="whitespace-normal"> {{ sous_menu.description }} </div>
-                        </twig:Td>
-                    </twig:Tr>
-                    <twig:Tr>
-                        <th>Is_activated</th>
-                        <twig:Td>
-                            {% if sous_menu.isActivated %}
-                            <twig:Badget type="primary"> activé </twig:Badget>
-                            {% else %}
-                            <twig:Badget type="danger"> non activé </twig:Badget>
-                            {% endif %}
-                        </twig:Td>
-                    </twig:Tr>
-                </tbody>
-            </twig:Table>
-
-            <twig:Card:Card>
-                <twig:Card:Header>
-                    <twig:Card:CardTitle>Les Images associé</twig:Card:CardTitle>
-                </twig:Card:Header>
-
-                <twig:Card:Body>
-                    <div class="grid grid-cols-3 gap-2 mt-3 px-3">
-                        {% for item in sous_menu.sousMenuImages %}
-                        <div class="w-full">
-                            <img 
-                                class="w-full h-full rounded-md border-2 border-primary" 
-                                src="{{ vich_uploader_asset(item, "srcFile") }}"
-                                alt="{{ item.content }}">
-                            <div class="flex gap-2 w-full">
-                                <button class="border border-red-800 bg-red-500 text-red-50 px-4 py-1.5 rounded-md my-2"> Supprimer </button>
-                                <button class="border border-gray-300 bg-gray-100 text-gray-70 px-4 py-1.5 rounded-md my-2"> Voir </button>
-                            </div>
-                        </div>
+                <twig:Tr>
+                    <th>Description</th>
+                    <twig:Td>
+                        <div class="whitespace-normal"> {{ sous_menu.description }} </div>
+                    </twig:Td>
+                </twig:Tr>
+                <twig:Tr>
+                    <th>Is_activated</th>
+                    <twig:Td>
+                        {% if sous_menu.isActivated %}
+                        <twig:Badget type="primary"> activé </twig:Badget>
                         {% else %}
-                            auccune image associé
-                        {% endfor %}
-                    </div>
-                </twig:Card:Body>
-            </twig:Card:Card>
-        </div>
+                        <twig:Badget type="danger"> non activé </twig:Badget>
+                        {% endif %}
+                    </twig:Td>
+                </twig:Tr>
+            </tbody>
+        </twig:Table>
     </twig:Card:Body>
 
     <twig:Card:Footer class="flex items-center gap-2 p-3">

@@ -40,16 +40,6 @@ class SousMenuType extends AbstractType
                         ->orderBy('m.orders', 'ASC');
                 },
             ])
-            ->add('sousMenuImages', CollectionType::class, [
-                'entry_type' => SousMenuImageType::class,
-                'allow_add' => true,
-                'allow_delete' => true,
-                'by_reference' => false,
-                'entry_options' => ['label' => false],
-                'attr' => [
-                    'data-controller' => 'form-collection'
-                ]
-            ])
 
             ->add('menuSousMenus', CollectionType::class, [
                 'entry_type' => MenuSousMenuType::class,

@@ -38,13 +38,6 @@ class SousMenu
     #[ORM\ManyToOne(inversedBy: 'sousMenus')]
     private ?Menu $menu = null;
 
-    /**
-     * @var Collection<int, SousMenuImages>
-     */
-    #[Groups(["sous_menu.index"])]
-    #[ORM\OneToMany(targetEntity: SousMenuImages::class, mappedBy: 'sous_menu', cascade: ['persist'])]
-    private Collection $sousMenuImages;
-
     #[ORM\Column]
     private ?int $orders = null;
 
@@ -61,7 +54,6 @@ class SousMenu
 
     public function __construct()
     {
-        $this->sousMenuImages = new ArrayCollection();
         $this->menuSousMenus = new ArrayCollection();
     }
 
@@ -145,36 +137,6 @@ class SousMenu
     public function setMenu(?Menu $menu): static
     {
         $this->menu = $menu;
-
-        return $this;
-    }
-
-    /**
-     * @return Collection<int, SousMenuImages>
-     */
-    public function getSousMenuImages(): Collection
-    {
-        return $this->sousMenuImages;
-    }
-
-    public function addSousMenuImage(SousMenuImages $sousMenuImage): static
-    {
-        if (!$this->sousMenuImages->contains($sousMenuImage)) {
-            $this->sousMenuImages->add($sousMenuImage);
-            $sousMenuImage->setSousMenu($this);
-        }
-
-        return $this;
-    }
-
-    public function removeSousMenuImage(SousMenuImages $sousMenuImage): static
-    {
-        if ($this->sousMenuImages->removeElement($sousMenuImage)) {
-            // set the owning side to null (unless already changed)
-            if ($sousMenuImage->getSousMenu() === $this) {
-                $sousMenuImage->setSousMenu(null);
-            }
-        }
 
         return $this;
     }

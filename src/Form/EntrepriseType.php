@@ -28,16 +28,6 @@ class EntrepriseType extends AbstractType
             ->add('vile')
             ->add('commune')
             ->add('avenue')
-            ->add('entrepriseContents', CollectionType::class, [
-                'entry_type' => EntrepriseContentType::class,
-                'allow_add' => true,
-                'allow_delete' => true,
-                'by_reference' => false,
-                'entry_options' => ['label' => false],
-                'attr' => [
-                    'data-controller' => 'form-collection'
-                ]
-            ])
             ->addEventListener(FormEvents::POST_SUBMIT, $this->AddOtherInput(...))
         ;
     }

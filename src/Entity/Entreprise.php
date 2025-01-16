@@ -38,9 +38,6 @@ class Entreprise
     #[ORM\Column]
     private ?bool $activated = null;
 
-    #[ORM\ManyToOne(inversedBy: 'entreprises')]
-    private ?EntrepriseContent $content = null;
-
     #[Groups(['entreprise.index'])]
     #[ORM\Column(length: 255)]
     private ?string $name = null;
@@ -48,13 +45,6 @@ class Entreprise
     #[Groups(['entreprise.index'])]
     #[ORM\Column(length: 255)]
     private ?string $litle_name = null;
-
-    /**
-     * @var Collection<int, EntrepriseContent>
-     */
-    #[Groups(['entreprise.index'])]
-    #[ORM\OneToMany(targetEntity: EntrepriseContent::class, mappedBy: 'entreprise', cascade: ['persist'])]
-    private Collection $entrepriseContents;
 
     #[Groups(['entreprise.index'])]
     #[ORM\Column(length: 255)]
@@ -82,7 +72,6 @@ class Entreprise
 
     public function __construct()
     {
-        $this->entrepriseContents = new ArrayCollection();
     }
 
     public function getId(): ?int
@@ -138,18 +127,6 @@ class Entreprise
         return $this;
     }
 
-    public function getContent(): ?EntrepriseContent
-    {
-        return $this->content;
-    }
-
-    public function setContent(?EntrepriseContent $content): static
-    {
-        $this->content = $content;
-
-        return $this;
-    }
-
     public function getName(): ?string
     {
         return $this->name;
@@ -190,36 +167,6 @@ class Entreprise
     public function setLogoFile(?File $logoFile): static
     {
         $this->logoFile = $logoFile;
-
-        return $this;
-    }
-
-    /**
-     * @return Collection<int, EntrepriseContent>
-     */
-    public function getEntrepriseContents(): Collection
-    {
-        return $this->entrepriseContents;
-    }
-
-    public function addEntrepriseContent(EntrepriseContent $entrepriseContent): static
-    {
-        if (!$this->entrepriseContents->contains($entrepriseContent)) {
-            $this->entrepriseContents->add($entrepriseContent);
-            $entrepriseContent->setEntreprise($this);
-        }
-
-        return $this;
-    }
-
-    public function removeEntrepriseContent(EntrepriseContent $entrepriseContent): static
-    {
-        if ($this->entrepriseContents->removeElement($entrepriseContent)) {
-            // set the owning side to null (unless already changed)
-            if ($entrepriseContent->getEntreprise() === $this) {
-                $entrepriseContent->setEntreprise(null);
-            }
-        }
 
         return $this;
     }

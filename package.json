@@ -36,8 +36,11 @@
         "build": "encore production --progress"
     },
     "dependencies": {
+        "@headlessui/react": "^2.2.0",
         "axios": "^1.7.8",
+        "sweetalert2": "^11.6.13",
         "tailwind-merge": "^2.5.5",
+        "tinymce": "^7.6.0",
         "tw-elements": "^2.0.0"
     }
 }

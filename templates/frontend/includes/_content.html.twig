@@ -9,12 +9,6 @@
             <!-- les Images qui sont afficher a un menu particuliere -->
             <twig:Front:Card:CardBody class="">
                 {{ sousMenu.description }}
-                <div {{ stimulus_controller("slide-image") }} class="sm:grid grid-cols-2 gap-3">
-                    {% for image in sousMenu.sousMenuImages %}
-                    <img class="w-full h-full border border-primary rounded-md"
-                        src="{{ vich_uploader_asset(image, "srcFile") }}" alt="{{ image.content }}">
-                    {% endfor %}
-                </div>
             </twig:Front:Card:CardBody>
         </twig:Front:Card:Card>
         {% endfor %}

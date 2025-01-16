@@ -12,7 +12,7 @@ use Symfony\Component\HttpFoundation\Request;
 final class ContactController extends AbstractController
 {
     public function __construct(
-        readonly private ContactRepository $contactRepository
+        readonly private ContactRepository $contactRepositor
     ) {}
 
     #[Route(name: 'app_api_contact', methods: ["GET"])]

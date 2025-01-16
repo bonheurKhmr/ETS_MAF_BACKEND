@@ -7,7 +7,7 @@
 
 <twig:Card:Card>
     <twig:Card:Header>
-        <twig:H1>contact {{ contact.name }} </twig:H1>
+        <twig:H1>contact {{ contact.label }} </twig:H1>
     </twig:Card:Header>
 
     <twig:Card:Body class="p-3">
@@ -15,7 +15,9 @@
             <tbody>
                 <tr>
                     <th>Icon</th>
-                    <td>{{ contact.icon | raw }}</td>
+                    <td>
+                        <div class="w-4 h-4">{{ contact.icon | raw }}</div>
+                    </td>
                 </tr>
                 <tr>
                     <th>Label</th>

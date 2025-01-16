@@ -45,19 +45,8 @@ class Service
     #[ORM\Column]
     private ?bool $is_activated = null;
 
-    #[ORM\ManyToOne(inversedBy: 'services')]
-    private ?SerciveFiles $file = null;
-
-    /**
-     * @var Collection<int, SerciveFiles>
-     */
-    #[Groups(["service.index"])]
-    #[ORM\OneToMany(targetEntity: SerciveFiles::class, mappedBy: 'service', cascade: ['persist'])]
-    private Collection $serciveFiles;
-
     public function __construct()
     {
-        $this->serciveFiles = new ArrayCollection();
     }
 
     public function getId(): ?int
@@ -164,45 +153,4 @@ class Service
         return $this;
     }
 
-    public function getFile(): ?SerciveFiles
-    {
-        return $this->file;
-    }
-
-    public function setFile(?SerciveFiles $file): static
-    {
-        $this->file = $file;
-
-        return $this;
-    }
-
-    /**
-     * @return Collection<int, SerciveFiles>
-     */
-    public function getSerciveFiles(): Collection
-    {
-        return $this->serciveFiles;
-    }
-
-    public function addSerciveFile(SerciveFiles $serciveFile): static
-    {
-        if (!$this->serciveFiles->contains($serciveFile)) {
-            $this->serciveFiles->add($serciveFile);
-            $serciveFile->setService($this);
-        }
-
-        return $this;
-    }
-
-    public function removeSerciveFile(SerciveFiles $serciveFile): static
-    {
-        if ($this->serciveFiles->removeElement($serciveFile)) {
-            // set the owning side to null (unless already changed)
-            if ($serciveFile->getService() === $this) {
-                $serciveFile->setService(null);
-            }
-        }
-
-        return $this;
-    }
 }

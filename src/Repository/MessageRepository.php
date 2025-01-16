@@ -2,39 +2,39 @@
 
 namespace App\Repository;
 
-use App\Entity\SerciveFiles;
+use App\Entity\Message;
 use Doctrine\Bundle\DoctrineBundle\Repository\ServiceEntityRepository;
 use Doctrine\Persistence\ManagerRegistry;
 
 /**
- * @extends ServiceEntityRepository<SerciveFiles>
+ * @extends ServiceEntityRepository<Message>
  */
-class SerciveFilesRepository extends ServiceEntityRepository
+class MessageRepository extends ServiceEntityRepository
 {
     public function __construct(ManagerRegistry $registry)
     {
-        parent::__construct($registry, SerciveFiles::class);
+        parent::__construct($registry, Message::class);
     }
 
 //    /**
-//     * @return SerciveFiles[] Returns an array of SerciveFiles objects
+//     * @return Message[] Returns an array of Message objects
 //     */
 //    public function findByExampleField($value): array
 //    {
-//        return $this->createQueryBuilder('s')
-//            ->andWhere('s.exampleField = :val')
+//        return $this->createQueryBuilder('m')
+//            ->andWhere('m.exampleField = :val')
 //            ->setParameter('val', $value)
-//            ->orderBy('s.id', 'ASC')
+//            ->orderBy('m.id', 'ASC')
 //            ->setMaxResults(10)
 //            ->getQuery()
 //            ->getResult()
 //        ;
 //    }
 
-//    public function findOneBySomeField($value): ?SerciveFiles
+//    public function findOneBySomeField($value): ?Message
 //    {
-//        return $this->createQueryBuilder('s')
-//            ->andWhere('s.exampleField = :val')
+//        return $this->createQueryBuilder('m')
+//            ->andWhere('m.exampleField = :val')
 //            ->setParameter('val', $value)
 //            ->getQuery()
 //            ->getOneOrNullResult()

@@ -11,67 +11,37 @@
     </twig:Card:Header>
 
     <twig:Card:Body class="p-3">
-        <div class="grid grid-cols-2 gap-6">
-            <twig:Table :action="false">
-                <tbody>
-                    <twig:Tr>
-                        <th>Logo</th>
-                        <twig:Td><img class="w-7 h-7 border border-primary rounded-md p-1"
-                                src="{{ vich_uploader_asset(entreprise, "logoFile") }}" alt="{{ entreprise.name }}">
-                        </twig:Td>
-                    </twig:Tr>
+        <twig:Table :action="false">
+            <tbody>
+                <twig:Tr>
+                    <th>Logo</th>
+                    <twig:Td><img class="w-7 h-7 border border-primary rounded-md p-1"
+                            src="{{ vich_uploader_asset(entreprise, "logoFile") }}" alt="{{ entreprise.name }}">
+                    </twig:Td>
+                </twig:Tr>
 
-                    <twig:Tr>
-                        <th>name</th>
-                        <twig:Td>{{ entreprise.name }}</twig:Td>
-                    </twig:Tr>
+                <twig:Tr>
+                    <th>name</th>
+                    <twig:Td>{{ entreprise.name }}</twig:Td>
+                </twig:Tr>
 
-                    <twig:Tr>
-                        <th>litle name</th>
-                        <twig:Td>{{ entreprise.litleName }}</twig:Td>
-                    </twig:Tr>
+                <twig:Tr>
+                    <th>litle name</th>
+                    <twig:Td>{{ entreprise.litleName }}</twig:Td>
+                </twig:Tr>
 
-                    <twig:Tr>
-                        <th>Activated</th>
-                        <twig:Td>
-                            {% if entreprise.activated %}
-                            <twig:Badget type="primary"> activé </twig:Badget>
-                            {% else %}
-                            <twig:Badget type="danger"> non activé </twig:Badget>
-                            {% endif %}
-                        </twig:Td>
-                    </twig:Tr>
-                </tbody>
-            </twig:Table>
-            <div>
-                <twig:Card:Card>
-                    <twig:Card:Header>
-                        <twig:Card:CardTitle>Autre Information</twig:Card:CardTitle>
-                    </twig:Card:Header>
-                    <twig:Table :thead="['#','Name', 'Contenue']">
-                        {% for key, item in entreprise.entrepriseContents %}
-                        <twig:Tr>
-                            <twig:Td> {{ key + 1 }} </twig:Td>
-                            <twig:Td> {{ item.title }} </twig:Td>
-                            <twig:Td>
-                                <div class="whitespace-normal">{{ item.description }}</div>
-                            </twig:Td>
-                            <twig:Td>
-                                <button
-                                    class="border border-gray-300 bg-gray-100 text-gray-70 px-4 py-1.5 rounded-md my-2">
-                                    <twig:Icon:Edit /> 
-                                </button>
-                                <button
-                                    class="border border-red-800 bg-red-500 text-red-50 px-4 py-1.5 rounded-md my-2">
-                                    <twig:Icon:Delete /> 
-                                </button>
-                            </twig:Td>
-                        </twig:Tr>
-                        {% endfor %}
-                    </twig:Table>
-                </twig:Card:Card>
-            </div>
-        </div>
+                <twig:Tr>
+                    <th>Activated</th>
+                    <twig:Td>
+                        {% if entreprise.activated %}
+                        <twig:Badget type="primary"> activé </twig:Badget>
+                        {% else %}
+                        <twig:Badget type="danger"> non activé </twig:Badget>
+                        {% endif %}
+                    </twig:Td>
+                </twig:Tr>
+            </tbody>
+        </twig:Table>
     </twig:Card:Body>
 
     <twig:Card:Footer class="flex items-center gap-2 p-3">

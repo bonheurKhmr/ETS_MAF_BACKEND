@@ -22,16 +22,6 @@ class ServiceType extends AbstractType
                 "required" => false
             ])
             ->add('is_activated')
-            ->add('SerciveFiles', CollectionType::class, [
-                'entry_type' => ServiceFileType::class,
-                'allow_add' => true,
-                'allow_delete' => true,
-                'by_reference' => false,
-                'entry_options' => ['label' => false],
-                'attr' => [
-                    'data-controller' => 'form-collection'
-                ]
-            ])
             ->addEventListener(FormEvents::POST_SUBMIT, $this->AddOtherInput(...))
         ;
     }
