@@ -10,25 +10,22 @@ import { addLoaderBtn, removeReloadBtn } from "../utils/loader";
 /* stimulusFetch: 'lazy' */
 export default class extends Controller {
   connect() {
-    this.element.addEventListener("submit", this.sendMessage);
+    this.element.addEventListener("submit", this.addRole);
   }
 
   /**
    *
    * @param {PointerEvent} e
    */
-  sendMessage = (e) => {
+  addRole(e) {
     e.preventDefault();
     const target = e.target;
-    const sendBtn = target.querySelector("#send-btn");
-    addLoaderBtn(sendBtn);
+    const saveRole = target.querySelector("#saveRole");
+    addLoaderBtn(saveRole);
     const data = new FormData(target);
     axios.post(target.getAttribute("action"), data).then((data) => {
-      target.querySelector("#first_name").value = "";
-      target.querySelector("#email").value = "";
-      target.querySelector("#message").value = "";
-      removeReloadBtn(sendBtn);
+      removeReloadBtn(saveRole);
       alert("success", data.data.success);
     });
-  };
+  }
 }

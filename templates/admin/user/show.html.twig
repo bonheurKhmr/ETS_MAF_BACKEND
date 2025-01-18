@@ -1,50 +1,115 @@
 {% extends 'base.html.twig' %}
 
-{% block title %}User{% endblock %}
+{% block title %}User
+{% endblock %}
 
 {% block body %}
-    <h1>User</h1>
 
-    <table class="table">
-        <tbody>
-            <tr>
-                <th>Id</th>
-                <td>{{ user.id }}</td>
-            </tr>
-            <tr>
-                <th>Username</th>
-                <td>{{ user.username }}</td>
-            </tr>
-            <tr>
-                <th>Roles</th>
-                <td>{{ user.roles ? user.roles|json_encode : '' }}</td>
-            </tr>
-            <tr>
-                <th>Password</th>
-                <td>{{ user.password }}</td>
-            </tr>
-            <tr>
-                <th>Email</th>
-                <td>{{ user.email }}</td>
-            </tr>
-            <tr>
-                <th>Fullname</th>
-                <td>{{ user.fullname }}</td>
-            </tr>
-            <tr>
-                <th>Birthday</th>
-                <td>{{ user.birthday ? user.birthday|date('Y-m-d') : '' }}</td>
-            </tr>
-            <tr>
-                <th>Adress</th>
-                <td>{{ user.Adress }}</td>
-            </tr>
-        </tbody>
-    </table>
+	<twig:Brodcump firstlink="app_admin_menu_index" firstlabel="Liste" pageactuel="Voir"/>
 
-    <a href="{{ path('app_admin_user_index') }}">back to list</a>
+	<twig:Card:Card>
+		<twig:Card:Header>
+			<twig:H1>
+				{{ user.fullname }}
+			</twig:H1>
+		</twig:Card:Header>
 
-    <a href="{{ path('app_admin_user_edit', {'id': user.id}) }}">edit</a>
+		<twig:Card:Body class="px-5">
+			<twig:Table :action="false">
+				<tbody>
+					<twig:Tr>
+						<th>Username</th>
+						<twig:Td>{{ user.username }}</twig:Td>
+					</twig:Tr>
+					<twig:Tr>
+						<th>Roles</th>
+						<twig:Td>{{ user.roles ? user.roles|json_encode : '' }}</twig:Td>
+					</twig:Tr>
+					<twig:Tr>
+						<th>Email</th>
+						<twig:Td>{{ user.email }}</twig:Td>
+					</twig:Tr>
+					<twig:Tr>
+						<th>Fullname</th>
+						<twig:Td>{{ user.fullname }}</twig:Td>
+					</twig:Tr>
+					<twig:Tr>
+						<th>Birthday</th>
+						<twig:Td>{{ user.birthday ? user.birthday|date('Y-m-d') : '' }}</twig:Td>
+					</twig:Tr>
+					<twig:Tr>
+						<th>Adress</th>
+						<twig:Td>{{ user.Adress }}</twig:Td>
+					</twig:Tr>
 
-    {{ include('admin/user/_delete_form.html.twig') }}
+					<twig:Tr>
+						<th>Gestions de role</th>
+						<twig:Td>
+							<div>
+								<twig:Button type="tiersary" data-twe-toggle="modal" data-twe-target="#exampleModalLg" data-twe-ripple-init data-twe-ripple-color="light">
+									Gestion de role utilisateur
+								</twig:Button>
+								<!--Large modal-->
+								<div data-twe-modal-init class="fixed left-0 top-0 z-[1055] hidden h-full w-full overflow-y-auto overflow-x-hidden outline-none" id="exampleModalLg" tabindex="-1" aria-labelledby="exampleModalLgLabel" aria-modal="true" role="dialog">
+									<div data-twe-modal-dialog-ref class="pointer-events-none relative w-auto translate-y-[-50px] opacity-0 transition-all duration-300 ease-in-out min-[576px]:mx-auto min-[576px]:mt-7 min-[576px]:max-w-[500px] min-[992px]:max-w-[800px]">
+										<div class="pointer-events-auto relative flex w-full flex-col rounded-md border-none bg-white bg-clip-padding text-current shadow-4 outline-none dark:bg-surface-dark">
+											<div
+												class="flex flex-shrink-0 items-center justify-between rounded-t-md border-b-2 border-neutral-100 p-4 dark:border-white/10">
+												<!-- Modal title -->
+												<h5 class="text-xl font-medium leading-normal text-surface dark:text-white" id="exampleModalLgLabel">
+													Gestion des roles
+												</h5>
+												<!-- Close button -->
+												<button type="button" class="box-content rounded-none border-none text-neutral-500 hover:text-neutral-800 hover:no-underline focus:text-neutral-800 focus:opacity-100 focus:shadow-none focus:outline-none dark:text-neutral-400 dark:hover:text-neutral-300 dark:focus:text-neutral-300" data-twe-modal-dismiss aria-label="Close">
+													<span class="[&>svg]:h-6 [&>svg]:w-6">
+														<svg xmlns="http://www.w3.org/2000/svg" fill="currentColor" viewbox="0 0 24 24" stroke-width="1.5" stroke="currentColor">
+															<path stroke-linecap="round" stroke-linejoin="round" d="M6 18L18 6M6 6l12 12"/>
+														</svg>
+													</span>
+												</button>
+											</div>
+
+											<!-- Modal body -->
+											<div class="relative overflow-y-auto p-4">
+												<div class="whitespace-normal">
+													<form {{ stimulus_controller("role-user") }} action="{{ path("app_admin_user_save_role", {'id': user.id}) }}" method="POST">
+														<div class="border border-gray-300 p-4 rounded-md mb-3">
+															{% for role in roles %}
+																<!--Default checkbox-->
+																<div class="mb-[0.125rem] flex items-center min-h-[1.5rem] ps-[1.5rem]">
+																	<input class="relative float-left -ms-[1.5rem] me-[6px] mt-[0.15rem] h-[1.125rem] w-[1.125rem] appearance-none rounded-[0.25rem] border-[0.125rem] border-solid border-secondary-500 outline-none before:pointer-events-none before:absolute before:h-[0.875rem] before:w-[0.875rem] before:scale-0 before:rounded-full before:bg-transparent before:opacity-0 before:shadow-checkbox before:shadow-transparent before:content-[''] checked:border-primary checked:bg-primary checked:before:opacity-[0.16] checked:after:absolute checked:after:-mt-px checked:after:ms-[0.25rem] checked:after:block checked:after:h-[0.8125rem] checked:after:w-[0.375rem] checked:after:rotate-45 checked:after:border-[0.125rem] checked:after:border-l-0 checked:after:border-t-0 checked:after:border-solid checked:after:border-white checked:after:bg-transparent checked:after:content-[''] hover:cursor-pointer hover:before:opacity-[0.04] hover:before:shadow-black/60 focus:shadow-none focus:transition-[border-color_0.2s] focus:before:scale-100 focus:before:opacity-[0.12] focus:before:shadow-black/60 focus:before:transition-[box-shadow_0.2s,transform_0.2s] focus:after:absolute focus:after:z-[1] focus:after:block focus:after:h-[0.875rem] focus:after:w-[0.875rem] focus:after:rounded-[0.125rem] focus:after:content-[''] checked:focus:before:scale-100 checked:focus:before:shadow-checkbox checked:focus:before:transition-[box-shadow_0.2s,transform_0.2s] checked:focus:after:-mt-px checked:focus:after:ms-[0.25rem] checked:focus:after:h-[0.8125rem] checked:focus:after:w-[0.375rem] checked:focus:after:rotate-45 checked:focus:after:rounded-none checked:focus:after:border-[0.125rem] checked:focus:after:border-l-0 checked:focus:after:border-t-0 checked:focus:after:border-solid checked:focus:after:border-white checked:focus:after:bg-transparent rtl:float-right dark:border-neutral-400 dark:checked:border-primary dark:checked:bg-primary" type="checkbox" value="{{ role.name }}" id="role-{{ role.id }}" {{ role.name in user.roles ? "checked" : ""}} name="role[]"/>
+																	<label class="inline-block ps-[0.15rem] hover:cursor-pointer" for="role-{{ role.id }}">
+																		{{ role.name }}
+																	</label>
+																</div>
+															{% endfor %}
+														</div>
+
+														<twig:Button type="primary" id="saveRole">
+															<span>Enregistre les roles selectionné</span>
+															<!-- button loader -->
+															<div></div>
+														</twig:Button>
+													</form>
+												</div>
+											</div>
+										</div>
+									</div>
+								</div>
+							</div>
+						</twig:Td>
+					</twig:Tr>
+				</tbody>
+			</twig:Table>
+
+			<div class="flex gap-3 items-center mb-3">
+				<twig:Button type="primary" :link="path('app_admin_user_edit', {'id': user.id})">
+					Editer
+				</twig:Button>
+
+				{{ include('admin/user/_delete_form.html.twig') }}
+			</div>
+
+		</twig:Card:Body>
+	</twig:Card:Card>
 {% endblock %}

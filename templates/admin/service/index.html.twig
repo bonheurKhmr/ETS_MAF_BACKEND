@@ -1,47 +1,51 @@
 {% extends 'base.html.twig' %}
 
-{% block title %}Service{% endblock %}
+{% block title %}Service
+{% endblock %}
 
 {% block body %}
-<twig:Brodcump pageActuel="list" />
+	<twig:Brodcump pageactuel="list"/>
 
 
-<twig:Card:Card>
-    <twig:Card:Header>
-        <twig:H1>Service</twig:H1>
-        <twig:Button link="{{ path('app_admin_service_new') }}" type="primary">Nouvaux</twig:Button>
-    </twig:Card:Header>
-    <div>
-        <div class="flex justify-end py-2">
-            <twig:Search />
-        </div>
+	<twig:Card:Card>
+		<twig:Card:Header>
+			<twig:H1>Service</twig:H1>
+			<twig:Button link="{{ path('app_admin_service_new') }}" type="primary">Nouvaux</twig:Button>
+		</twig:Card:Header>
+		<div>
+			<div class="flex justify-end py-2">
+				<twig:Search/>
+			</div>
 
-        <twig:Table :thead="['#', 'Service', 'Description', 'Status']">
-            {% for key, service in services %}
-            <twig:Tr>
-                <twig:Td>{{ key + 1 }}</twig:Td>
-                <twig:Td>{{ service.service }}</twig:Td>
-                <twig:Td>{{ service.description | u.truncate(15, "...", true) }}</twig:Td>
-                <twig:Td>
-                    {% if service.isActivated %}
-                    <twig:Badget type="primary"> activé </twig:Badget>
-                    {% else %}
-                    <twig:Badget type="danger"> non activé </twig:Badget>
-                    {% endif %}
-                </twig:Td>
-                <td>
-                    <twig:ActionButton edit="{{ path('app_admin_service_edit', {'id': service.id}) }}"
-                        show="{{ path('app_admin_service_show', {'id': service.id}) }}">
-                        {{ include('admin/service/_delete_form.html.twig') }}
-                    </twig:ActionButton>
-                </td>
-            </twig:Tr>
-            {% else %}
-            <tr>
-                <td colspan="4">no records found</td>
-            </tr>
-            {% endfor %}
-        </twig:Table>
-    </div>
-</twig:Card:Card>
+			<twig:Table :thead="['#', 'Service', 'Description', 'Status']">
+				{% for key, service in services %}
+					<twig:Tr>
+						<twig:Td>{{ key + 1 }}</twig:Td>
+						<twig:Td>{{ service.service }}</twig:Td>
+						<twig:Td>{{ service.description | u.truncate(15, "...", true) }}</twig:Td>
+						<twig:Td>
+							{% if service.isActivated %}
+								<twig:Badget type="primary">
+									activé
+								</twig:Badget>
+							{% else %}
+								<twig:Badget type="danger">
+									non activé
+								</twig:Badget>
+							{% endif %}
+						</twig:Td>
+						<td>
+							<twig:ActionButton edit="{{ path('app_admin_service_edit', {'id': service.id}) }}" show="{{ path('app_admin_service_show', {'id': service.id}) }}">
+								{{ include('admin/service/_delete_form.html.twig') }}
+							</twig:ActionButton>
+						</td>
+					</twig:Tr>
+				{% else %}
+					<tr>
+						<td colspan="4">no records found</td>
+					</tr>
+				{% endfor %}
+			</twig:Table>
+		</div>
+	</twig:Card:Card>
 {% endblock %}

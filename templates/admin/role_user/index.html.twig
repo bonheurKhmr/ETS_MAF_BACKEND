@@ -1,0 +1,38 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}role utilisateur
+{% endblock %}
+
+{% block body %}
+	<twig:Brodcump pageactuel="list"/>
+
+	<twig:Card:Card>
+		<twig:Card:Header>
+			<twig:H1>role_user</twig:H1>
+			<twig:Button link="{{ path('app_admin_role_user_new') }}" type="primary">Nouvaux</twig:Button>
+		</twig:Card:Header>
+		<div>
+			<div class="flex justify-end py-2">
+				<twig:Search/>
+			</div>
+
+			<twig:Table :thead="['#','role']">
+				{% for key, role_user in role_users %}
+					<twig:Tr>
+						<twig:Td>{{ key + 1 }}</twig:Td>
+						<twig:Td>{{ role_user.role }}</twig:Td>
+						<td>
+							<twig:ActionButton edit="{{ path('app_admin_role_user_edit', {'id': role_user.id}) }}" show="">
+								{{ include('admin/role_user/_delete_form.html.twig') }}
+							</twig:ActionButton>
+						</td>
+					</twig:Tr>
+				{% else %}
+					<tr>
+						<td colspan="3">no records found</td>
+					</tr>
+				{% endfor %}
+			</twig:Table>
+		</div>
+	</twig:Card:Card>
+{% endblock %}

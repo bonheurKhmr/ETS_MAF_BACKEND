@@ -1,5 +1,7 @@
 <div class=" flex items-center justify-end px-4 gap-2.5" {{ attributes }}>
-    <twig:Action:Show href="{{ show }}" />
+    {% if show != "" %}
+        <twig:Action:Show href="{{ show }}" />
+    {% endif %}
     <twig:Action:Edit href="{{ edit }}" />
     {% block content %}{% endblock %}
 </div>

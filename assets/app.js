@@ -9,10 +9,14 @@ import "./bootstrap.js";
 import "./styles/app.css";
 
 // Initialization for ES Users
-import { Collapse, Dropdown, initTWE, Input } from "tw-elements";
+import { Collapse, Dropdown, initTWE, Input, Modal, Ripple } from "tw-elements";
+import Flash from "./customers/Flash.js";
 
-initTWE({ Collapse, Dropdown, Input });
+initTWE({ Collapse, Dropdown, Input, Modal, Ripple });
 
 registerReactControllerComponents(
   require.context("./react/controllers", true, /\.(j|t)sx?$/)
 );
+
+// customer
+customElements.define("app-flash", Flash);

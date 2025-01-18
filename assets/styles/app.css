@@ -91,3 +91,7 @@
     @apply bg-background text-foreground;
   }
 }
+
+.disabled {
+  @apply cursor-not-allowed opacity-50;
+}

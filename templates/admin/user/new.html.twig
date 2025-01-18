@@ -1,11 +1,16 @@
 {% extends 'base.html.twig' %}
 
-{% block title %}New User{% endblock %}
+{% block title %}Nouvaux Utilisateur
+{% endblock %}
 
 {% block body %}
-    <h1>Create new User</h1>
-
-    {{ include('admin/user/_form.html.twig') }}
-
-    <a href="{{ path('app_admin_user_index') }}">back to list</a>
+	<twig:Brodcump firstlink="app_admin_user_index" firstlabel="Liste" pageactuel="Nouveau"/>
+	<twig:Card:Card>
+		<twig:Card:Header>
+			<twig:H1>Nouvaux Utilisateur</twig:H1>
+		</twig:Card:Header>
+		<twig:Card:Body class="p-3">
+			{{ include('admin/user/_form.html.twig') }}
+		</twig:Card:Body>
+	</twig:Card:Card>
 {% endblock %}

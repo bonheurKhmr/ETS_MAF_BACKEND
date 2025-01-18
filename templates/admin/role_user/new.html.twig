@@ -1,0 +1,18 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}Nouvaux Role utilisateur
+{% endblock %}
+
+{% block body %}
+	<twig:Brodcump firstlink="app_admin_role_user_index" firstlabel="Liste" pageactuel="Nouveau"/>
+
+	<twig:Card:Card>
+		<twig:Card:Header>
+			<twig:H1>Nouvaux role utilisateur</twig:H1>
+		</twig:Card:Header>
+		<twig:Card:Body class="p-3">
+			{{ include('admin/role_user/_form.html.twig') }}
+		</twig:Card:Body>
+	</twig:Card:Card>
+
+{% endblock %}

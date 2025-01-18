@@ -1,0 +1,4 @@
+<form method="post" action="{{ path('app_admin_role_user_delete', {'id': role_user.id}) }}" onsubmit="return confirm('Are you sure you want to delete this item?');">
+	<input type="hidden" name="_token" value="{{ csrf_token('delete' ~ role_user.id) }}">
+	<twig:Action:Delete/>
+</form>

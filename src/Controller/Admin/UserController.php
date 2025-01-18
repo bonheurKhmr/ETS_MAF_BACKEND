@@ -4,6 +4,7 @@ namespace App\Controller\Admin;
 
 use App\Entity\User;
 use App\Form\UserType;
+use App\Repository\RoleUserRepository;
 use App\Repository\UserRepository;
 use Doctrine\ORM\EntityManagerInterface;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
@@ -43,11 +44,21 @@ final class UserController extends AbstractController
     }
 
     #[Route('/{id}', name: 'app_admin_user_show', methods: ['GET'])]
-    public function show(User $user): Response
+    public function show(User $user, RoleUserRepository $roleUserRepository): Response
     {
         return $this->render('admin/user/show.html.twig', [
             'user' => $user,
+            'roles' => $roleUserRepository->findAll()
         ]);
+    }
+
+    #[Route('/{id}', name: 'app_admin_user_save_role', methods: ['POST'])]
+    public function addRoleUser(User $user, Request $request, EntityManagerInterface $em): Response
+    {
+        $roles = $request->get('role') !== null ? $request->get('role') : [];
+        $user->setRoles($roles);
+        $em->flush();
+        return $this->json(["success" => "ajoue de role avec success", "user" => $user]);
     }
 
     #[Route('/{id}/edit', name: 'app_admin_user_edit', methods: ['GET', 'POST'])]
@@ -71,7 +82,7 @@ final class UserController extends AbstractController
     #[Route('/{id}', name: 'app_admin_user_delete', methods: ['POST'])]
     public function delete(Request $request, User $user, EntityManagerInterface $entityManager): Response
     {
-        if ($this->isCsrfTokenValid('delete'.$user->getId(), $request->getPayload()->getString('_token'))) {
+        if ($this->isCsrfTokenValid('delete' . $user->getId(), $request->getPayload()->getString('_token'))) {
             $entityManager->remove($user);
             $entityManager->flush();
         }

@@ -1,51 +1,60 @@
 {% extends 'base.html.twig' %}
 
-{% block title %}Sous menu{% endblock %}
+{% block title %}Sous menu
+{% endblock %}
 
 {% block body %}
-<twig:Brodcump firstLink="app_admin_sous_menu_index" firstLabel="Liste" pageActuel="Voir" />
+	<twig:Brodcump firstlink="app_admin_sous_menu_index" firstlabel="Liste" pageactuel="Voir"/>
 
-<twig:Card:Card>
-    <twig:Card:Header>
-        <twig:H1>sous_menu {{ sous_menu.title }} </twig:H1>
-    </twig:Card:Header>
+	<twig:Card:Card>
+		<twig:Card:Header>
+			<twig:H1>sous_menu
+				{{ sous_menu.title }}
+			</twig:H1>
+		</twig:Card:Header>
 
-    <twig:Card:Body class="p-3">
-        <twig:Table :action="false">
-            <tbody>
-                <twig:Tr>
-                    <th>Title</th>
-                    <twig:Td>{{ sous_menu.title }}</twig:Td>
-                </twig:Tr>
+		<twig:Card:Body class="p-3">
+			<twig:Table :action="false">
+				<tbody>
+					<twig:Tr>
+						<th>Title</th>
+						<twig:Td>{{ sous_menu.title }}</twig:Td>
+					</twig:Tr>
 
-                <twig:Tr>
-                    <th>Menu</th>
-                    <twig:Td>{{ sous_menu.menu.label }}</twig:Td>
-                </twig:Tr>
+					<twig:Tr>
+						<th>Menu</th>
+						<twig:Td>{{ sous_menu.menu.label }}</twig:Td>
+					</twig:Tr>
 
-                <twig:Tr>
-                    <th>Description</th>
-                    <twig:Td>
-                        <div class="whitespace-normal"> {{ sous_menu.description }} </div>
-                    </twig:Td>
-                </twig:Tr>
-                <twig:Tr>
-                    <th>Is_activated</th>
-                    <twig:Td>
-                        {% if sous_menu.isActivated %}
-                        <twig:Badget type="primary"> activé </twig:Badget>
-                        {% else %}
-                        <twig:Badget type="danger"> non activé </twig:Badget>
-                        {% endif %}
-                    </twig:Td>
-                </twig:Tr>
-            </tbody>
-        </twig:Table>
-    </twig:Card:Body>
+					<twig:Tr>
+						<th>Description</th>
+						<twig:Td>
+							<div class="whitespace-normal">
+								{{ sous_menu.description }}
+							</div>
+						</twig:Td>
+					</twig:Tr>
+					<twig:Tr>
+						<th>Is_activated</th>
+						<twig:Td>
+							{% if sous_menu.isActivated %}
+								<twig:Badget type="primary">
+									activé
+								</twig:Badget>
+							{% else %}
+								<twig:Badget type="danger">
+									non activé
+								</twig:Badget>
+							{% endif %}
+						</twig:Td>
+					</twig:Tr>
+				</tbody>
+			</twig:Table>
+		</twig:Card:Body>
 
-    <twig:Card:Footer class="flex items-center gap-2 p-3">
-        <twig:Action:Edit href="{{ path('app_admin_sous_menu_edit', {'id': sous_menu.id}) }}" />
-        {{ include('admin/sous_menu/_delete_form.html.twig') }}
-    </twig:Card:Footer>
-</twig:Card:Card>
+		<twig:Card:Footer class="flex items-center gap-2 p-3">
+			<twig:Action:Edit href="{{ path('app_admin_sous_menu_edit', {'id': sous_menu.id}) }}"/>
+			{{ include('admin/sous_menu/_delete_form.html.twig') }}
+		</twig:Card:Footer>
+	</twig:Card:Card>
 {% endblock %}
